@@ -2,7 +2,7 @@ from StringIO import StringIO
 
 from invoke import task
 
-from utils.load import *
+from utils import *
 
 
 @task(help={'config': 'CKAN config file', 'datasets': 'datasets csv',
@@ -15,3 +15,11 @@ def load(c, config, datasets=None, resources=None, files=None):
               in_stream=StringIO(d))
     if resources:
         l.resource(open(resources), files)
+
+@task(help={'config': 'CKAN config file'})
+def usermail(c, config):
+    users = StringIO()
+    c.run('ckanapi action user_list -c {}'.format(config),
+         out_stream=users)
+    um = UserMail(users.getvalue())
+    um.get_list()

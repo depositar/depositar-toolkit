@@ -36,3 +36,17 @@
 #### 執行範例：
 
     $ inv load -c /etc/ckan/default/development.ini -d dataset.csv -r resource.csv -f ./data
+
+### 取得帳號與電子郵件清單 (usermail)
+
+註：此功能僅列出帳號清單。去除重複與空值等工作，需另行處理。
+
+#### 執行方式：
+
+    $ inv usermail -c CONFIG_FILE
+
+* CONFIG: CKAN config 檔案 (ini)
+
+#### 執行範例：
+
+    $ inv usermail -c /etc/ckan/default/development.ini
