@@ -24,10 +24,19 @@ class Load:
         reader = csv.DictReader(metadata)
         fields = self.schema['dataset_fields']
         license_list = self.registry.action.license_list()
+        theme_list = self.registry.action.group_list(all_fields=True)
         for row in reader:
             name = row[u'資料集編號']
             out_row = out_rows.get(name,
                     {'name': name, 'owner_org':self.c.owner_proj, 'keywords': []})
+            # theme
+            theme = row.get(u'主題')
+            if theme:
+                for t in theme_list:
+                    if t['title'] == theme:
+                        theme = {'name': t['name']}
+                out_row['groups'] = out_row['groups'] + [theme] \
+                    if type(out_row.get('groups')) is list else [theme]
             for k, v in row.iteritems():
                 if not v: continue
                 for f in fields:
