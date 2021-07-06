@@ -11,7 +11,7 @@
 ## 安裝
 
 1. [安裝 depositar](https://docs.depositar.io/zh_TW/latest/maintaining/installing/install-from-source.html)
-2. 進入 Python 虛擬環境：`$ . /usr/lib/ckan/default/bin/activate`
+2. 進入 depositar 所安裝的 Python 虛擬環境：`$ . /usr/lib/ckan/default/bin/activate`
 3. 安裝必須套件：`$ pip install -r requirements.txt`
 
 ## 操作方式
@@ -26,7 +26,7 @@
 
 #### 執行方式：
 
-    $ inv load -c CONFIG_FILE -d DATASETS -r RESOURCES -f FILES
+    $ inv load -c CONFIG -d DATASETS -r RESOURCES -f FILES
 
 * CONFIG: CKAN config 檔案 (ini)
 * DATASETS: 後設資料 (資料集層級) CSV 檔案
@@ -43,10 +43,11 @@
 
 #### 執行方式：
 
-    $ inv usermail -c CONFIG_FILE
+    $ inv usermail -c CONFIG -u USER
 
 * CONFIG: CKAN config 檔案 (ini)
+* USER: CKAN `系統管理員`帳號名稱 (選用；預設為 `default`)
 
 #### 執行範例：
 
-    $ inv usermail -c /etc/ckan/default/development.ini
+    $ inv usermail -c /etc/ckan/default/development.ini -u default
