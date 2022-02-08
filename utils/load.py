@@ -2,11 +2,11 @@
 
 import os
 import re
+import csv
 import json
 import urllib
 from collections import OrderedDict
 
-import unicodecsv as csv
 from ckanapi import RemoteCKAN
 
 

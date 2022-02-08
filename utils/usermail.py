@@ -1,7 +1,6 @@
+import csv
 import sys
 import json
-
-import unicodecsv as csv
 
 
 class UserMail:
