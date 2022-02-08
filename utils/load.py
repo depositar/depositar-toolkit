@@ -4,6 +4,7 @@ import os
 import re
 import csv
 import json
+import yaml
 import urllib
 from collections import OrderedDict
 
@@ -14,10 +15,10 @@ class Load:
     def __init__(self, config):
         self.c = config
         self.registry = RemoteCKAN(config.api_url, apikey=config.api_key)
-        self.schema = json.loads(
-                urllib.urlopen('https://github.com/depositar/' + \
-                'ckanext-data-depositario/raw/master/ckanext/' + \
-                'data_depositario/scheming.json').read())
+        with urllib.request.urlopen('https://raw.githubusercontent.com/depositar/' + \
+                                    'ckanext-data-depositario/master/ckanext/' + \
+                                    'data_depositario/schemas/dataset.yaml') as url:
+            self.schema = yaml.load(url.read())
 
     def dataset(self, metadata):
         out_rows = OrderedDict()
@@ -37,7 +38,7 @@ class Load:
                         theme = {'name': t['name']}
                 out_row['groups'] = out_row['groups'] + [theme] \
                     if type(out_row.get('groups')) is list else [theme]
-            for k, v in row.iteritems():
+            for k, v in row.items():
                 if not v: continue
                 for f in fields:
                     if f.get('label')['zh_TW'] == k:
@@ -60,7 +61,7 @@ class Load:
                         else:
                             out_row[f['field_name']] = v
             out_rows[name] = out_row
-        return '\n'.join([json.dumps(v) for k, v in out_rows.iteritems()])
+        return '\n'.join([json.dumps(v) for k, v in out_rows.items()])
 
     def resource(self, metadata, files):
         reader = csv.DictReader(metadata)
@@ -81,7 +82,7 @@ class Load:
                 except IOError:
                     print("#%d: Missing file, skip" % r_i)
                     continue
-            for k, v in row.iteritems():
+            for k, v in row.items():
                 if not v: continue
                 for f in fields:
                     if f.get('label')['zh_TW'] == k:

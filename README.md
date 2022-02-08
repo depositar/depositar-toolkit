@@ -26,9 +26,8 @@
 
 #### 執行方式：
 
-    $ inv load -c CONFIG -d DATASETS -r RESOURCES -f FILES
+    $ inv load -d DATASETS -r RESOURCES -f FILES
 
-* CONFIG: CKAN config 檔案 (ini)
 * DATASETS: 後設資料 (資料集層級) CSV 檔案
 * RESOURCES: 後設資料 (資源層級) CSV 檔案
 * FILES: 實體檔案所在資料夾位置 (選用)
