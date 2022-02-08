@@ -1,4 +1,4 @@
-from StringIO import StringIO
+import io
 
 from invoke import task
 
@@ -12,13 +12,13 @@ def load(c, config, datasets=None, resources=None, files=None):
     if datasets:
         d = l.dataset(open(datasets))
         c.run('ckanapi load datasets --create-only -c {}'.format(config),
-              in_stream=StringIO(d))
+              in_stream=io.StringIO(d))
     if resources:
         l.resource(open(resources), files)
 
 @task(help={'config': 'CKAN config file', 'user': 'site adm user'})
 def usermail(c, config, user='default'):
-    users = StringIO()
+    users = io.StringIO()
     c.run('ckanapi action user_list -c {} -u {}'.format(config, user),
          out_stream=users)
     um = UserMail(users.getvalue())

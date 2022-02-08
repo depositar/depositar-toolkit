@@ -3,7 +3,7 @@
 import os
 import re
 import json
-import urllib2
+import urllib
 from collections import OrderedDict
 
 import unicodecsv as csv
@@ -15,7 +15,7 @@ class Load:
         self.c = config
         self.registry = RemoteCKAN(config.api_url, apikey=config.api_key)
         self.schema = json.loads(
-                urllib2.urlopen('https://github.com/depositar/' + \
+                urllib.urlopen('https://github.com/depositar/' + \
                 'ckanext-data-depositario/raw/master/ckanext/' + \
                 'data_depositario/scheming.json').read())
 
@@ -69,7 +69,7 @@ class Load:
             out_row = {'package_id': row[u'資料集編號']}
             loc = row[u'網址/檔案名稱']
             if not loc:
-                print "#%d: Missing url or file. Skip." % r_i
+                print("#%d: Missing url or file. Skip." % r_i)
                 continue
             if loc[0:7] == 'http://' or loc[0:8] == 'https://':
                 # url
@@ -79,7 +79,7 @@ class Load:
                 try:
                     out_row['upload'] = open(os.path.join(files, loc), 'rb')
                 except IOError:
-                    print "#%d: Missing file, skip" % r_i
+                    print("#%d: Missing file, skip" % r_i)
                     continue
             for k, v in row.iteritems():
                 if not v: continue
