@@ -1,5 +1,7 @@
 # 研究資料寄存所命令列工具 / Command Line Tools for depositar
 
+本工具僅於 Python 3.6 以上環境測試。
+
 ## 事前準備
 
 一連線設定檔，如 `invoke.yaml.example`，並命名為 `invoke.yaml`:
@@ -10,8 +12,8 @@
 
 ## 安裝
 
-1. [安裝 depositar](https://docs.depositar.io/zh_TW/latest/maintaining/installing/install-from-source.html)
-2. 進入 depositar 所安裝的 Python 虛擬環境：`$ . /usr/lib/ckan/default/bin/activate`
+1. (若僅使用批次上傳則非必要) [安裝 depositar](https://docs.depositar.io/zh_TW/latest/maintaining/installing/install-from-source.html)
+2. (若僅使用批次上傳則非必要) 進入 depositar 所安裝的 Python 虛擬環境：`$ . /usr/lib/ckan/default/bin/activate`
 3. 安裝必須套件：`$ pip install -r requirements.txt`
 
 ## 操作方式
@@ -34,7 +36,7 @@
 
 #### 執行範例：
 
-    $ inv load -c /etc/ckan/default/development.ini -d dataset.csv -r resource.csv -f ./data
+    $ inv load -d dataset.csv -r resource.csv -f ./data
 
 ### 取得帳號與電子郵件清單 (usermail)
 
