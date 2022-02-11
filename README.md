@@ -6,9 +6,13 @@
 
 一連線設定檔，如 `invoke.yaml.example`，並命名為 `invoke.yaml`:
 
-* owner_proj: 資料集所屬之專案
+* owner_proj: 資料集所屬之專案名稱
+    * 為專案網址 (https://data.depositar.io/organization/XXX) 的最後部分 (XXX)
 * api_url: CKAN 主機所在位址
+    * 正式網站：https://data.depositar.io/
+    * 測試網站：https://demo.depositar.io/
 * api_key: CKAN 使用者 API 金鑰
+    * 請參考[操作手冊](https://docs.depositar.io/zh_TW/stable/user-guide.html#api)取得 API Key
 
 ## 安裝
 
