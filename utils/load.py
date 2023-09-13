@@ -18,7 +18,7 @@ class Load:
         with urllib.request.urlopen('https://raw.githubusercontent.com/depositar/' + \
                                     'ckanext-data-depositario/master/ckanext/' + \
                                     'data_depositario/schemas/dataset.yaml') as url:
-            self.schema = yaml.load(url.read())
+            self.schema = yaml.safe_load(url.read())
 
     def dataset(self, metadata):
         out_rows = OrderedDict()
@@ -41,11 +41,11 @@ class Load:
             for k, v in row.items():
                 if not v: continue
                 for f in fields:
-                    if f.get('label')['zh_TW'] == k:
+                    if f.get('label')['zh_Hant_TW'] == k:
                         # data_type, temp_res
                         if f.get('choices'):
                             for c in f['choices']:
-                                if c['label']['zh_TW'] == v:
+                                if c['label']['zh_Hant_TW'] == v:
                                     v = c['value']
                         # license_id
                         if f['field_name'] == 'license_id':
@@ -85,11 +85,11 @@ class Load:
             for k, v in row.items():
                 if not v: continue
                 for f in fields:
-                    if f.get('label')['zh_TW'] == k:
+                    if f.get('label')['zh_Hant_TW'] == k:
                         # encoding
                         if f.get('choices'):
                             for c in f['choices']:
-                                if c['label']['zh_TW'] == v:
+                                if c['label']['zh_Hant_TW'] == v:
                                     v = c['value']
                         out_row[f['field_name']] = v
             self.registry.action.resource_create(**out_row)
